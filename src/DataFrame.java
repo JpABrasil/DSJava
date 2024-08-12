@@ -1,15 +1,16 @@
-
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
-
-public class DataFrame {
+public class DataFrame implements Serializable {
     public ArrayList<Cell> data = new ArrayList<>();
     public ArrayList<Column> columns = new ArrayList<>();
+
     public DataFrame(){
 
     }
+
     public void readCsv(String caminhoArquivo){
         File arquivo = new File(caminhoArquivo);
         try( FileReader fr = new FileReader(arquivo)){

@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-
-public class Column {
+import java.io.Serializable;
+public class Column implements Serializable {
     public String Name;
     public Class<?> Type;
     public Column(String str){

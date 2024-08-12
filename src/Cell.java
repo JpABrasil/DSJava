@@ -1,4 +1,6 @@
-public class Cell {
+import java.io.Serializable;
+
+public class Cell implements Serializable {
     public Class<?> type;
     public Object value;
     public Column Column;
