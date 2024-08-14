@@ -3,10 +3,12 @@ import java.io.FileReader;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 public class DataFrame implements Serializable {
     public ArrayList<Cell> data = new ArrayList<>();
     public ArrayList<Column> columns = new ArrayList<>();
-
+    public int NumberRows = 0;
     public DataFrame(){
 
     }
@@ -49,6 +51,7 @@ public class DataFrame implements Serializable {
                         texto = new StringBuilder();
                         columnIndex = 0;
                         rowIndex++;
+                        NumberRows++;
                         row = new Row(rowIndex);
                     } else {
                         texto.append(ch);
@@ -56,6 +59,7 @@ public class DataFrame implements Serializable {
                 }
                 intch = fr.read();
             }
+            NumberRows--;
             data.removeLast();
         }catch(IOException e){
             System.err.println("Arquivo não encontrado: " + caminhoArquivo);
@@ -86,5 +90,35 @@ public class DataFrame implements Serializable {
                 indexPrinted = false;
             }
         }
+        System.out.println();
+    }
+
+    public double LinearProduct(DataFrame x1, DataFrame x2){
+
+    }
+
+    public DataFrame getColumns(String[] acolumns){
+        DataFrame features = new DataFrame();
+        ArrayList<String> columns = new ArrayList<>(Arrays.asList(acolumns));
+        features.NumberRows = NumberRows;
+        for(Cell cell: data){
+            if(columns.contains(cell.Column.Name)){
+                features.data.add(cell);
+                if(!features.columns.contains(cell.Column)){
+                    features.columns.add(cell.Column);
+                }
+            }
+        }
+        return features;
+    }
+
+    public ArrayList<Cell> getTarget(String column){
+        ArrayList<Cell> target = new ArrayList<>();
+        for(Cell cell: data){
+            if(cell.Column.Name.equals(column)){
+                target.add(cell);
+            }
+        }
+        return target;
     }
 }

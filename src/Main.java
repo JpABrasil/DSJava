@@ -1,5 +1,6 @@
 import java.io.*;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main{
     //Comando para ajuda
@@ -42,7 +43,7 @@ public class Main{
             System.err.println("Tipo de Arquivo não suportado");
         }
     }
-    //Comando para ver um Dataframe
+    //Comando para ver o head de um Dataframe
     public static void h(String name){
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("DataFrames/" + name + ".obj"))) {
             DataFrame df = (DataFrame) ois.readObject();
@@ -53,16 +54,32 @@ public class Main{
     }
 
     public static void main(String[] args) {
-        if(args[0].equals("help")) {
-            help();
+        if(args.length != 0){
+            if(args[0].equals("help")) {
+                help();
+            }
+            else if(args[0].equals("dataframe")){
+                if(args[1].equals("-n")){
+                    n(args[2], args[3], args[4]);
+                }
+                else if (args[1].equals("-h")) {
+                    h(args[2]);
+                }
+            }
         }
-        else if(args[0].equals("dataframe")){
-            if(args[1].equals("-n")){
-                n(args[2], args[3], args[4]);
-            }
-            else if (args[1].equals("-h")) {
-                h(args[2]);
-            }
+        else{
+            DataFrame df = new DataFrame();
+            df.readCsv("D:\\JOÃO\\JavaProjects\\DataScience\\out\\production\\DataScience\\username.csv");
+            String[] columnsX = {"Username","Last name"};
+            String[] columnsY = {"Identifier"};
+            DataFrame X = df.getColumns(columnsX);
+            DataFrame Y = df.getColumns(columnsY);
+            df.head();
+            X.head();
+
+            System.out.println(X.NumberRows);
+            LinearRegression ln = new LinearRegression(X,Y);
+
         }
 
 
