@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main{
@@ -70,15 +69,10 @@ public class Main{
         else{
             DataFrame df = new DataFrame();
             df.readCsv("D:\\JOÃO\\JavaProjects\\DataScience\\out\\production\\DataScience\\username.csv");
-            String[] columnsX = {"Username","Last name"};
-            String[] columnsY = {"Identifier"};
-            DataFrame X = df.getColumns(columnsX);
-            DataFrame Y = df.getColumns(columnsY);
-            df.head();
-            X.head();
+            System.out.println(Arrays.toString(df.getSize()));
+            String[] s = {"Username","Last name"};
+            DataFrame X = df.getColumns(s);
 
-            System.out.println(X.NumberRows);
-            LinearRegression ln = new LinearRegression(X,Y);
 
         }
 

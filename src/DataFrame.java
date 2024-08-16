@@ -93,8 +93,8 @@ public class DataFrame implements Serializable {
         System.out.println();
     }
 
-    public double LinearProduct(DataFrame x1, DataFrame x2){
-
+    public static double ScalarProduct(DataFrame x1, DataFrame x2){
+        return 0.0;
     }
 
     public DataFrame getColumns(String[] acolumns){
@@ -112,13 +112,8 @@ public class DataFrame implements Serializable {
         return features;
     }
 
-    public ArrayList<Cell> getTarget(String column){
-        ArrayList<Cell> target = new ArrayList<>();
-        for(Cell cell: data){
-            if(cell.Column.Name.equals(column)){
-                target.add(cell);
-            }
-        }
-        return target;
+    public int[] getSize(){
+        return new int[]{NumberRows, columns.size()};
     }
+
 }
