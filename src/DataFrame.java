@@ -25,7 +25,7 @@ public class DataFrame implements Serializable {
             while(intch != -1) {
                 char ch = (char) intch;
                 if(firstline){
-                    if (ch == ';') {
+                    if (ch == ',') {
                         Column column = new Column(texto.toString());
                         columns.add(column);
                         texto = new StringBuilder();
@@ -39,7 +39,7 @@ public class DataFrame implements Serializable {
                         texto.append(ch);
                     }
                 }else{
-                    if (ch == ';') {
+                    if (ch == ',') {
                         Cell cell = new Cell(texto.toString(), columns.get(columnIndex),row);
                         data.add(cell);
                         columnIndex++;
@@ -93,10 +93,6 @@ public class DataFrame implements Serializable {
         System.out.println();
     }
 
-    public static double ScalarProduct(DataFrame x1, DataFrame x2){
-        return 0.0;
-    }
-
     public DataFrame getColumns(String[] acolumns){
         DataFrame features = new DataFrame();
         ArrayList<String> columns = new ArrayList<>(Arrays.asList(acolumns));
@@ -110,6 +106,16 @@ public class DataFrame implements Serializable {
             }
         }
         return features;
+    }
+
+    public ArrayList<Cell> getRow(int rowIndex){
+        ArrayList<Cell> row = new ArrayList<>();
+        for(Cell cell: data){
+            if(cell.Row.index == rowIndex){
+                row.add(cell);
+            }
+        }
+        return row;
     }
 
     public int[] getSize(){

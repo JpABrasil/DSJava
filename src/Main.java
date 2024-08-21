@@ -68,10 +68,15 @@ public class Main{
         }
         else{
             DataFrame df = new DataFrame();
-            df.readCsv("D:\\JOÃO\\JavaProjects\\DataScience\\out\\production\\DataScience\\username.csv");
-            System.out.println(Arrays.toString(df.getSize()));
-            String[] s = {"Username","Last name"};
-            DataFrame X = df.getColumns(s);
+            df.readCsv("D:\\JOÃO\\JavaProjects\\DataScience\\out\\production\\DataScience\\Housing.csv");
+            String[] xColumns = {"bedrooms","area"};
+            String[] yColumns = {"price"};
+            DataFrame X = df.getColumns(xColumns);
+            DataFrame Y = df.getColumns(yColumns);
+            LinearRegression ln = new LinearRegression(X,Y);
+            ln.train(1.0,10);
+
+
 
 
         }
