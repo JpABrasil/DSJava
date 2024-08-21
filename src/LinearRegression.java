@@ -20,6 +20,7 @@ public class LinearRegression {
     }
     public void train(double learningRate, int batchs){
         int k = 0;
+        Column tetaValues = new Column("Teta Values");
         while(k < batchs){
             double errors = 0.0;
             for (int i = 1; i < X.NumberRows + 1; i++) {
@@ -28,17 +29,17 @@ public class LinearRegression {
                 errors += Math.abs(error);
                 for(int j = 0; j < X.getRow(i).size();j++){
                    double xij = Double.parseDouble((String)X.getRow(i).get(j).value);
-                   double tetaj = (double) teta.data.get(j).value;
+                   Cell tetaj = teta.data.get(j);
                    double gradient = error * xij;
-                   double updatedTetaj =tetaj - learningRate * gradient;
-                   Column tetaValues = new Column("Teta Values");
-                   Row currentRow = new Row(j+1);
-                   Cell updatedteta =  new Cell(updatedTetaj,tetaValues,currentRow);
-                   teta.data.set(j,updatedteta);
+                   double updatedTetaj =(double) tetaj.value - learningRate * gradient;
+                   tetaj.value = updatedTetaj;
                 }
-
+                for(Cell cell:this.teta.data){
+                    System.out.print(cell.value + " ");
+                }
+                System.out.println();
             }
-            System.out.println("Batch: " + (k+1) + " Erro Médio: " + errors/X.NumberRows);
+            //System.out.println("Batch: " + (k+1) + " Erro Médio: " + errors/X.NumberRows);
             k = k + 1;
         }
     }

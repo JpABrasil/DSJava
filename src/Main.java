@@ -74,7 +74,7 @@ public class Main{
             DataFrame X = df.getColumns(xColumns);
             DataFrame Y = df.getColumns(yColumns);
             LinearRegression ln = new LinearRegression(X,Y);
-            ln.train(1.0,10);
+            ln.train(0.0001,1);
 
 
 
